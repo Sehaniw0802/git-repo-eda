@@ -1,0 +1,20 @@
+First needs to import the required libraries
+
+#importing the libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+Then Import the dataset that we are going to be use. Here we used the dataset named 'Crime.csv'
+
+#importing the dataset as 'df'
+df = pd.read_csv('Crime.csv')
+
+Now we are going to visualise the Bar Chart
+
+#Visualising the bar chart
+#plt.figure(figsize=(10,8), dpi=200)
+sns.countplot(data=df, x='Police District Number')
+plt.xticks(rotation=90)
+plt.legend(loc= (1.1,0.51))
