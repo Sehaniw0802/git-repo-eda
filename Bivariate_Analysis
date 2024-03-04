@@ -1,0 +1,60 @@
+#importing the required libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#importing the dataset 'Crime.csv' as 'df', 'Housing.csv' as 'df2'
+df = pd.read_csv('Crime.csv')
+df2 = pd.read_csv('housing.csv')
+
+#Stacked Bar Chart 
+table1=pd.crosstab(df["Police District Name"],df["Crime Name1"],)
+sns.set(style="darkgrid")
+table1.div(table1.sum(1).astype(float), axis=0).plot(kind='bar', color = sns.color_palette("rocket"),stacked=True,width=0.8, figsize=(7,5),rot=0)
+
+plt.xlabel('Police District Name',fontsize=10)
+plt.ylabel('Proportion of Crimes',fontsize=10)
+plt.legend(title="Crime Name1",loc=(1.05,0.5),fontsize=10)
+plt.title('Stacked Bar Chart of Crime Name vs Police District',fontsize = 10)
+plt.xticks(rotation = 90)
+plt.show()
+
+
+#Clustered Bar Chart
+plt.figure(figsize=(10,8), dpi=200)
+sns.countplot(data=df, x='Police District Number', hue ='Crime Name1', palette = sns.color_palette('Set2'))
+plt.legend(loc= (1.1,0.51))
+plt.xlabel('Police District Number',fontsize=10)
+plt.legend(title="Crime Name1",loc=(1.05,0.5),fontsize=10)
+
+
+#Boxplot
+sns.boxplot(data=grouped_df, x='Place', y='Crime Name2', palette = sns.color_palette('Set2'))
+plt.ylim(0, 1000)
+plt.xticks(rotation =90)
+plt.ylabel('Count of Drug Crimes',fontsize=10)
+plt.title('Box plot of crime type Drug vs Places',fontsize = 10)
+
+
+#Scatterplot
+plt.figure(figsize=(12,8), dpi=200)
+sns.scatterplot(x='median_income', y='median_house_value', data=df2)
+plt.title('Scatterplot of income vs house value',fontsize = 10)
+
+#Violin Plot
+plt.figure(figsize=(6,4), dpi=200)
+sns.violinplot(data=df2, x='Runtime2', y='Genre')
+plt.title('Viloin plot of runtime2 vs Genre',fontsize = 10)
+
+#Visualising 3 variables 
+#scatterplot
+plt.figure(figsize=(12,8), dpi=200)
+sns.scatterplot(x='median_income', y='median_house_value', data=df2, hue='housing_median_age')
+plt.title('Scatterplot of income vs house value with age of the house',fontsize = 10)
+
+#Boxplot
+plt.figure(figsize=(6,4), dpi=200)
+sns.boxplot(data=df2, y='Runtime2', x='Genre', hue='Certificate')
+plt.xticks(rotation =90)
+plt.legend(bbox_to_anchor=(1.05, 0.5))

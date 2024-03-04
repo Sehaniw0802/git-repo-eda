@@ -1,0 +1,56 @@
+#importing the required libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#importing the dataset 'Crime.csv' as 'df', 'Housing.csv' as 'df2'
+df = pd.read_csv('Crime.csv')
+df2 = pd.read_csv('housing.csv')
+
+#bar chart
+#plt.figure(figsize=(10,8), dpi=200)
+sns.countplot(data=df, x='Police District Number')
+plt.xticks(rotation=90)
+plt.legend(loc= (1.1,0.51))
+
+
+# Pie Chart of Churn Label
+plt.figure(figsize=(9,7))
+sizes=df2['Place'].value_counts()
+#colors=['PaleTurquoise','DarkCyan' ]
+explode_list = [0.15, 0]
+
+plt.pie(sizes,autopct='%1.1f%%',startangle=85,textprops={'color':'black'},labels=sizes.index,
+                pctdistance=.7,shadow=False, colors =sns.color_palette('Set2'))
+plt.title('Pie Chart of Places of drug crimes')
+plt.show()
+
+
+#boxplot
+plt.figure(figsize=(12,8), dpi =200)
+plt.xticks(rotation =90)
+#plt.ylim(0, 10000000)
+sns.boxplot(data=df, x = 'Crime Name1', y ='Victims')
+
+
+# Histogram
+plt.figure(figsize=(7,5), tight_layout=True)
+#bins = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75]
+plt.hist(df['Victims'], bins=bins, color='Blue', linewidth=0.3,alpha=0.5)
+plt.xlabel('Victims',fontsize=14)
+plt.ylabel('Count',fontsize=14)
+plt.title('Histogram of Victims', fontsize = 15)
+plt.show()
+
+#Density Curve
+plt.figure(figsize=(7,5))
+sns.displot(data=df2, x='housing_median_age', bins=10, kde=True)
+plt.title('Density Curve of house age', fontsize = 15)
+plt.show()
+
+#Kernel Density Curve
+plt.figure(figsize=(7,5))
+sns.kdeplot(data=df2, x='housing_median_age')
+plt.title('Density Curve of house age', fontsize = 15)
+plt.show()
